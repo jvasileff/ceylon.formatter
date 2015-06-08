@@ -92,7 +92,7 @@ shared String? help(topic) {
     }
 }
 
-String formatType(Type<Anything> type) {
+String formatType(Type<out Anything> type) {
     assert (nonempty partialTypes = collectPartialTypes(type));
     StringBuilder ret = StringBuilder();
     ret.append(partialTypes.first);
@@ -107,7 +107,7 @@ String formatType(Type<Anything> type) {
     return ret.string;
 }
 
-String[] collectPartialTypes(Type<Anything> type) {
+String[] collectPartialTypes(Type<out Anything> type) {
     if (is UnionType<Anything> type) {
         return concatenate(*type.caseTypes.collect(collectPartialTypes));
     } else if (type.exactly(`Integer`)) {
